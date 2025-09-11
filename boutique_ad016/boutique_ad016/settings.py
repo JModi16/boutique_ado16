@@ -23,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'djang77o-insecure-$a2q6q$vnq0^#2fci*aka(ls#&q$9uz(o0^!zx6ree_j@*%k#b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
