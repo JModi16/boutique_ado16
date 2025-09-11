@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.http import HttpResponse
+
+def home(request):
+    return HttpResponse("Welcome to Boutique AD016!")
 
 urlpatterns = [
+    path('', home, name='home'),  # This handles the root URL
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
 ]
