@@ -49,7 +49,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'boutique_ado.urls'
+ROOT_URLCONF = 'boutique_ad016.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +67,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'boutique_ado.wsgi.application'
+WSGI_APPLICATION = 'boutique_ad016.wsgi.application'
 
 
 # Database
