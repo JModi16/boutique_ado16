@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home',
+    'django.contrib.sites',         # <-- Required for allauth
+    'allauth',                      # <-- Required for allauth
+    'allauth.account',              # <-- Required for allauth
+    'allauth.socialaccount',        # <-- Required for allauth
     # 'products',
 ]
    
