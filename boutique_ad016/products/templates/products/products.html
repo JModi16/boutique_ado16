@@ -37,12 +37,12 @@
                                 <option value="name_asc" {% if current_sorting == 'name_asc' %}selected{% endif %}>Name (A-Z)</option>
                                 <option value="name_desc" {% if current_sorting == 'name_desc' %}selected{% endif %}>Name (Z-A)</option>
                                 <option value="category_asc" {% if current_sorting == 'category_asc' %}selected{% endif %}>Category (A-Z)</option>
-                                <option value="categnt_cory_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
+                                <option value="category_desc" {% if current_sorting == 'category_desc' %}selected{% endif %}>Category (Z-A)</option>
                             </select>
                         </div>
                     </div>
                     <div class="col-12 col-md-6 order-md-first">
-                        <p class ="text-muted mt-3 text-center text-md-left">
+                        <p class="text-muted mt-3 text-center text-md-left">
                              {% if search_term or current_categories or current_sorting != 'None_None' %}
                                 <span class="small"><a href="{% url 'products' %}">Products Home</a> | </span>
                             {% endif %}
@@ -51,3 +51,9 @@
                     </div>
                 </div>
                 <div class="row">
+                    <!-- Your product content goes here -->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
