@@ -23,10 +23,20 @@
         
         <div class="row">
             <div class="col"> 
-                <hr class="w-50 mb-1">
-                
                 {% if bag_items %}
-                    <div class="table-respone rounded"></div>
+                    <div class="table-responsive rounded">
+                {% else %}
+                    <p class="lead mb-5">Your bag is currently empty.</p>
+                    <a href="{% url 'products' %}" class="btn btn-outline-black rounded-0 btn-lg">
+                        <span class=icon">
+                            <i class="fas fa-chevron-left"> </i>
+                        </span>
+                    </a>
+                {% endif %}
+                <hr class="w-50 mb-1">
+
+                {% if bag_items %}
+                    <div class="table-responsive rounded"></div>
                 {% else %}
 
                 {% else %}
