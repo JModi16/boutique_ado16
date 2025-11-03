@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.account',              # <-- Required for allauth
     'allauth.socialaccount',        # <-- Required for allauth
     'products',
+    'bag'
 ]
    
 
