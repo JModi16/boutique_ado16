@@ -1,3 +1,4 @@
+from itertools import product
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.urls import reverse
@@ -46,6 +47,7 @@ def add_to_bag(request, item_id):
 
 def adjust_bag(request, item_id):
     """ Adjust the quantity of the specified product to the specified amount """
+    product = Product.objects.get(pk=item_id)
 
     quantity = int(request.POST.get('quantity'))
     size = None
@@ -60,6 +62,7 @@ def adjust_bag(request, item_id):
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
+                messages.success(request, f'Updated size {size.upper()} {product.name} quantity to {bag[item_id]["items_by_size"][size]}')
     else:
         if quantity > 0:
             bag[item_id] = quantity
@@ -82,6 +85,7 @@ def remove_from_bag(request, item_id):
             del bag[item_id]['items_by_size'][size]
             if not bag[item_id]['items_by_size']:
                 bag.pop(item_id)
+            messages.success(request, f'Removed size {size.upper()} {product.name} from your bag')
         else:
             bag.pop(item_id)
 
@@ -89,8 +93,6 @@ def remove_from_bag(request, item_id):
         return HttpResponse(status=200)
     
     except Exception as e:
+
+        messages.error(request, f'Error removing item: {e}')
         return HttpResponse(status=500)
-
-
-
-    
