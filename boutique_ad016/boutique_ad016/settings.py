@@ -45,8 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',        # <-- Required for allauth
     'home'
     'products',
-    'bag'
-    'checkout'
+    'bag',
+    'checkout',
 ]
    
 
@@ -103,7 +103,7 @@ ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 
-WSGI_APPLICATION = 'boutique_ado.wsgi.application'
+WSGI_APPLICATION = 'boutique_ado16.wsgi.application'
 
 
 # Database
