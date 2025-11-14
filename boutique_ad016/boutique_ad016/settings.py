@@ -45,9 +45,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',        # <-- Required for allauth
     'products',
     'bag',
-    'checkout',
-    
-     # Other
+    'checkout.apps.CheckoutConfig',  # Use this format instead of just 'checkout
     'crispy_forms',
 ]
    
@@ -77,19 +75,19 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # required by allauth
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
-                'bag.contexts.bag_contents',  # <-- Added to include bag contents
+                'bag.contexts.bag_contents',
             ],
-            '  builtins': [
+            'builtins': [  # <-- Fixed: removed extra spaces
                 'crispy_forms.templatetags.crispy_forms_tags',
                 'crispy_forms.templatetags.crispy_forms_field',
             ]
         },
     },
-]            
+] 
              
 
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
