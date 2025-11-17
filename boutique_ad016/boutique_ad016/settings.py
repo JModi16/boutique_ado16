@@ -51,7 +51,8 @@ INSTALLED_APPS = [
     'bag',
     'checkout',
     'profiles',
-    'checkout.apps.CheckoutConfig',  # Use this format instead of just 'checkout
+    
+    #Third party apps
     'crispy_forms',
 ]
    
