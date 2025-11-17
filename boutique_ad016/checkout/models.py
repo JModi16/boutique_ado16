@@ -6,8 +6,8 @@ from django.conf import settings
 
 from django_countries.fields import CountryField
 
-from boutique_ad016.profiles.models import UserProfile
 from products.models import Product
+from profiles.models import UserProfile
 
 
 class Order(models.Model):
