@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',        # <-- Required for allauth
     'products',
     'bag',
+    'checkout',
+    'profiles',
     'checkout.apps.CheckoutConfig',  # Use this format instead of just 'checkout
     'crispy_forms',
 ]
