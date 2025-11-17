@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     
     #Third party apps
     'crispy_forms',
+    'django_countries',  # Add this line
 ]
    
 
@@ -65,6 +66,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'allauth.account.middleware.AccountMiddleware',  # Add this line
 ]
 
 ROOT_URLCONF = 'boutique_ad016.urls'
