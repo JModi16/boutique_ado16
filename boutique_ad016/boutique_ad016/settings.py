@@ -113,7 +113,11 @@ AUTHENTICATION_BACKENDS = [
 
 SITE_ID = 1
 
+# Email settings for development
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Allauth settings
+ACCOUNT_EMAIL_VERIFICATION = 'none'  # Disable email verification for development
 
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
