@@ -36,7 +36,7 @@ DEBUG = 'DEVELOPMENT' in os.environ
 ALLOWED_HOSTS = [
     '127.0.0.1' ,  # vs code preview
     'localhost', # listen for stripe webhooks
-    'boutiqueado16-87312841c5b4.herokuapp.com/', # heroku app
+    'boutiqueado16-87312841c5b4.herokuapp.com', # heroku app
 
 ]
 
@@ -129,7 +129,6 @@ ACCOUNT_EMAIL_VERIFICATION = 'none'  # Disable email verification for developmen
 
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
