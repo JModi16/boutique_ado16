@@ -12,7 +12,6 @@ from products.models import Product
 from profiles.forms import UserProfileForm
 from profiles.models import UserProfile
 from bag.contexts import bag_contents
-from bag.contexts import bag_contents
 
 import stripe
 import json
@@ -138,7 +137,6 @@ def checkout(request):
             'client_secret': intent.client_secret,
         }
 
-        return render(request, template, context)
         return render(request, template, context)
         # end of the corrected indentation
 
