@@ -2,23 +2,21 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-
-from checkout.webhook_handler import StripeWH_Handler
-
+from checkout.models import Order, OrderLineItem
+from products.models import Product
 import stripe
+import json
 
 
 @require_POST
 @csrf_exempt
 def webhook(request):
     """Listen for webhooks from Stripe"""
-    # Setup
     wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
 
-    # get the webhook data and verify its signature
     payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    sig_header = request.META.get('HTTP_STRIPE_SIGNATURE', '')
     event = None
 
     try:
@@ -26,30 +24,36 @@ def webhook(request):
             payload, sig_header, wh_secret
         )
     except ValueError as e:
-        # Invalid payload
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
         return HttpResponse(status=400)
     except Exception as e:
         return HttpResponse(content=e, status=400)
-    
-    # Set up a webhook handler
-    handler = StripeWH_Handler(request)
 
-    # Map webhook events to relevant handler functions
-    event_map = {
-        'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
-        'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
-    }
+    # Handle the event
+    if event['type'] == 'payment_intent.succeeded':
+        intent = event['data']['object']
+        pid = intent.id
+        bag = intent.metadata.bag
+        save_info = intent.metadata.save_info
 
-    # Get the webhook type from Stripe
-    event_type = event['type']
+        # Fulfill the purchase, send the customer an email, etc.
+        # That's where you'd put your 20 lines of code so this function doesn't timeout
+        try:
+            order = Order.objects.get(stripe_pid=pid)
+            return HttpResponse(
+                content=f'Webhook received: {event["type"]} | SUCCESS: Verified order already in database',
+                status=200)
+        except Order.DoesNotExist:
+            order = None
+            return HttpResponse(
+                content=f'Webhook received: {event["type"]} | ERROR: Order not found',
+                status=404)
 
-    # If there's a handler for it, get it from the event map
-    # Use the generic one by default
-    event_handler = event_map.get(event_type, handler.handle_event)
-    
-    # Call the event handler with the event
-    response = event_handler(event)
-    return response
+    elif event['type'] == 'payment_intent.payment_failed':
+        intent = event['data']['object']
+        return HttpResponse(
+            content=f'Webhook received: {event["type"]}',
+            status=200)
+
+    return HttpResponse(content=f'Webhook received: {event["type"]}', status=200)
