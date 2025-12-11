@@ -37,8 +37,6 @@ def webhook(request):
         bag = intent.metadata.bag
         save_info = intent.metadata.save_info
 
-        # Fulfill the purchase, send the customer an email, etc.
-        # That's where you'd put your 20 lines of code so this function doesn't timeout
         try:
             order = Order.objects.get(stripe_pid=pid)
             return HttpResponse(

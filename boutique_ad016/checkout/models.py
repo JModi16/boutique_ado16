@@ -1,11 +1,10 @@
 import uuid
-
 from django.db import models
 from django.db.models import Sum
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 from django.conf import settings
-
 from django_countries.fields import CountryField
-
 from products.models import Product
 from profiles.models import UserProfile
 
