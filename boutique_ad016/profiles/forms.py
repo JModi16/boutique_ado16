@@ -30,5 +30,9 @@ class UserProfileForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'border-black rounded-0 profile-form-input'
+                self.fields[field].widget.attrs['class'] = 'border-black rounded-0 profile-form-input'
+            else:
+                # Special handling for country field
+                self.fields[field].widget.attrs['class'] = 'custom-select d-block w-100 border-black rounded-0'
+            
             self.fields[field].label = False
