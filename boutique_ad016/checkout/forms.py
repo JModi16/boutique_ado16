@@ -1,11 +1,14 @@
 from django import forms
-from django_countries.widgets import CountrySelectWidget
+from django_countries.fields import CountryField
 from .models import Order
 
+
 class OrderForm(forms.ModelForm):
-    default_country = forms.CharField(
+    country = CountryField(blank_label='Select country').formfield(
         required=False,
-        widget=CountrySelectWidget()
+        widget=forms.Select(attrs={
+            'class': 'custom-select d-block w-100',
+        })
     )
 
     class Meta:
@@ -15,10 +18,6 @@ class OrderForm(forms.ModelForm):
                   'town_or_city', 'postcode', 'county', 'country')
 
     def __init__(self, *args, **kwargs):
-        """
-        Add placeholders and classes, remove auto-generated
-        labels and set autofocus on first field
-        """
         super().__init__(*args, **kwargs)
         placeholders = {
             'full_name': 'Full Name',
@@ -31,7 +30,6 @@ class OrderForm(forms.ModelForm):
             'county': 'County, State or Locality',
         }
 
-        self.fields['country'].widget.attrs['class'] = 'custom-select d-block w-100'
         for field in self.fields:
             if field != 'country':
                 if self.fields[field].required:
@@ -39,5 +37,5 @@ class OrderForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+                self.fields[field].widget.attrs['class'] = 'stripe-style-input'
             self.fields[field].label = False
