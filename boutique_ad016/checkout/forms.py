@@ -1,15 +1,8 @@
 from django import forms
-from django_countries.fields import CountryField
 from .models import Order
 
 
 class OrderForm(forms.ModelForm):
-    country = CountryField(blank_label='Select country').formfield(
-        required=False,
-        widget=forms.Select(attrs={
-            'class': 'custom-select d-block w-100 border-black rounded-0',
-        })
-    )
 
     class Meta:
         model = Order
