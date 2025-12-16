@@ -7,7 +7,7 @@ class OrderForm(forms.ModelForm):
     country = CountryField(blank_label='Select country').formfield(
         required=False,
         widget=forms.Select(attrs={
-            'class': 'custom-select d-block w-100',
+            'class': 'custom-select d-block w-100 border-black rounded-0',
         })
     )
 
@@ -30,6 +30,7 @@ class OrderForm(forms.ModelForm):
             'county': 'County, State or Locality',
         }
 
+        self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if field != 'country':
                 if self.fields[field].required:
@@ -37,5 +38,6 @@ class OrderForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-                self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+                self.fields[field].widget.attrs['class'] = 'stripe-style-input border-black rounded-0'
+            
             self.fields[field].label = False
