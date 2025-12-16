@@ -89,7 +89,11 @@
                         {{ order_form.town_or_city | as_crispy_field }}
                         {{ order_form.county | as_crispy_field }}
                         {{ order_form.postcode | as_crispy_field }}
-                        {{ order_form.country | as_crispy_field }}
+                        
+                        <!-- Render country field WITHOUT crispy to avoid BlankChoiceIterator error -->
+                        <div class="form-group">
+                            {{ order_form.country }}
+                        </div>
                         
                         <div class="form-check form-check-inline float-right mr-0">
 							{% if user.is_authenticated %}
