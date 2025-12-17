@@ -91,10 +91,8 @@
                         {{ order_form.postcode | as_crispy_field }}
                         
                         <!-- Render country field WITHOUT crispy to avoid BlankChoiceIterator error -->
-                        <div class="form-group">
-                            {{ order_form.country }}
-                        </div>
-                        
+                        {{ order_form.country }}
+                    
                         <div class="form-check form-check-inline float-right mr-0">
 							{% if user.is_authenticated %}
 								<label class="form-check-label" for="id-save-info">Save this delivery information to my profile</label>

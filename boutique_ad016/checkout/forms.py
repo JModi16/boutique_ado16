@@ -24,6 +24,10 @@ class OrderForm(forms.ModelForm):
         }
 
         self.fields['full_name'].widget.attrs['autofocus'] = True
+        
+        # Handle country field separately with proper styling
+        self.fields['country'].widget.attrs['class'] = 'custom-select d-block w-100 border-black rounded-0'
+        
         for field in self.fields:
             if field != 'country':
                 if self.fields[field].required:
