@@ -1,13 +1,23 @@
 from django import forms
+from django_countries import countries
 from .models import Order
 
 
 class OrderForm(forms.ModelForm):
+    # Replace the model field on the form with a concrete ChoiceField
+    country = forms.ChoiceField(
+        choices=[('', 'Select country')] + list(countries),
+        required=False,
+        widget=forms.Select(attrs={'class': 'custom-select d-block w-100'}),
+    )
+
     class Meta:
         model = Order
-        fields = ('full_name', 'email', 'phone_number',
-                  'street_address1', 'street_address2',
-                  'town_or_city', 'postcode', 'country', 'county',)
+        fields = (
+            'full_name', 'email', 'phone_number',
+            'street_address1', 'street_address2',
+            'town_or_city', 'postcode', 'country', 'county',
+        )
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,12 +31,6 @@ class OrderForm(forms.ModelForm):
             'street_address2': 'Street Address 2',
             'county': 'County, State or Locality',
         }
-
-        # Force concrete choices to avoid BlankChoiceIterator __len__ issues
-        self.fields['country'].choices = list(self.fields['country'].choices)
-        if hasattr(self.fields['country'].widget, 'choices'):
-            self.fields['country'].widget.choices = list(self.fields['country'].widget.choices)
-
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if field != 'country':
@@ -35,6 +39,4 @@ class OrderForm(forms.ModelForm):
                     'placeholder': placeholder,
                     'class': 'stripe-style-input'
                 })
-            else:
-                self.fields[field].widget.attrs['class'] = 'custom-select d-block w-100'
             self.fields[field].label = False
