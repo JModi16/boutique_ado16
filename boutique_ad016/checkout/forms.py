@@ -35,5 +35,8 @@ class OrderForm(forms.ModelForm):
                 else:
                     placeholder = placeholders[field]
                 self.fields[field].widget.attrs['placeholder'] = placeholder
-            self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+                self.fields[field].widget.attrs['class'] = 'stripe-style-input'
+            else:
+                # Special styling for country select field
+                self.fields[field].widget.attrs['class'] = 'custom-select d-block w-100'
             self.fields[field].label = False
