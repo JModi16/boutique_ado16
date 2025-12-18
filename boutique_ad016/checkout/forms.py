@@ -27,6 +27,9 @@ class OrderForm(forms.ModelForm):
             'county': 'County, State or Locality',
         }
 
+        # Force country choices to a list to avoid BlankChoiceIterator __len__ issue
+        self.fields['country'].choices = list(self.fields['country'].choices)
+
         self.fields['full_name'].widget.attrs['autofocus'] = True
         for field in self.fields:
             if field != 'country':
