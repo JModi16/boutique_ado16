@@ -30,6 +30,7 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     'localhost',
     'boutiqueado16-87312841c5b4.herokuapp.com',
+    'boutiqueado16.herokuapp.com',
 ]
 
 # Application definition
