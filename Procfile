@@ -1,1 +1,1 @@
-web: gunicorn boutique_ad016.wsgi:application
+web: cd boutique_ad016 && gunicorn boutique_ad016.wsgi:application
